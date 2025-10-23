@@ -1,0 +1,76 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 50px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Центрируем текст по умолчанию */
+}
+
+.modal-close {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    background: #f0f0f0; /* Светлый фон круга */
+    border: none;
+    border-radius: 100%;
+    cursor: pointer;
+    color: #000;
+}
+
+    .modal-close:hover {
+        background: #ddd; /* Лёгкое затемнение при наведении */
+    }
+
+.modal-body {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрируем элементы внутри */
+}
+
+    .modal-body input,
+    .modal-body textarea {
+        width: 100%;
+        max-width: 400px; /* Ограничим ширину */
+        padding: 12px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 12px; /* Закругления для полей */
+        font-size: 16px;
+        box-sizing: border-box;
+    }
+
+    .modal-body button {
+        padding: 10px 25px;
+        font-size: 16px;
+        border: none;
+        border-radius: 12px; /* Закругления для кнопки */
+        background-color: #007bff;
+        color: white;
+        cursor: pointer;
+    }
+
+        .modal-body button:hover {
+            background-color: #0056b3;
+        }
