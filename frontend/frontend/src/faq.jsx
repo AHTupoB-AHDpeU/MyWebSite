@@ -1,11 +1,12 @@
-import React from "react";
+﻿import React from 'react';
 
-function Faq() {
+function FAQ() {
     return (
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "80vh", fontSize: "32px" }}>
-            FAQ
+        <div style={{ padding: "20px", textAlign: "center" }}>
+            <h1>Часто задаваемые вопросы</h1>
+            <p>Здесь будут ответы на вопросы.</p>
         </div>
     );
 }
 
-export default Faq;
+export default FAQ;
