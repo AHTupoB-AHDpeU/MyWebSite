@@ -9,9 +9,15 @@
     <PackageJsonScriptsBuild Condition="$(PackageJsonScriptsBuild) == ''">vite build</PackageJsonScriptsBuild>
     <PackageJsonScriptsLint Condition="$(PackageJsonScriptsLint) == ''">eslint .</PackageJsonScriptsLint>
     <PackageJsonScriptsPreview Condition="$(PackageJsonScriptsPreview) == ''">vite preview</PackageJsonScriptsPreview>
+    <PackageJsonDependenciesGsapReact Condition="$(PackageJsonDependenciesGsapReact) == ''">^2.1.2</PackageJsonDependenciesGsapReact>
+    <PackageJsonDependenciesFramerMotion Condition="$(PackageJsonDependenciesFramerMotion) == ''">^12.23.24</PackageJsonDependenciesFramerMotion>
+    <PackageJsonDependenciesGsap Condition="$(PackageJsonDependenciesGsap) == ''">^3.13.0</PackageJsonDependenciesGsap>
+    <PackageJsonDependenciesMotion Condition="$(PackageJsonDependenciesMotion) == ''">^12.23.24</PackageJsonDependenciesMotion>
     <PackageJsonDependenciesReact Condition="$(PackageJsonDependenciesReact) == ''">^19.1.1</PackageJsonDependenciesReact>
     <PackageJsonDependenciesReactDom Condition="$(PackageJsonDependenciesReactDom) == ''">^19.1.1</PackageJsonDependenciesReactDom>
     <PackageJsonDependenciesReactRouterDom Condition="$(PackageJsonDependenciesReactRouterDom) == ''">^7.9.4</PackageJsonDependenciesReactRouterDom>
+    <PackageJsonDependenciesReactWrapBalancer Condition="$(PackageJsonDependenciesReactWrapBalancer) == ''">^1.1.1</PackageJsonDependenciesReactWrapBalancer>
+    <PackageJsonDependenciesShadcn Condition="$(PackageJsonDependenciesShadcn) == ''">^3.5.0</PackageJsonDependenciesShadcn>
     <PackageJsonDevdependenciesEslintJs Condition="$(PackageJsonDevdependenciesEslintJs) == ''">^9.36.0</PackageJsonDevdependenciesEslintJs>
     <PackageJsonDevdependenciesTypesReact Condition="$(PackageJsonDevdependenciesTypesReact) == ''">^19.1.16</PackageJsonDevdependenciesTypesReact>
     <PackageJsonDevdependenciesTypesReactDom Condition="$(PackageJsonDevdependenciesTypesReactDom) == ''">^19.1.9</PackageJsonDevdependenciesTypesReactDom>

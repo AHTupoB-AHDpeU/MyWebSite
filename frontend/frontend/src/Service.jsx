@@ -1,5 +1,6 @@
 ﻿import React, { useState, useEffect } from 'react';
 import Modal from './Modal';
+import './Service.css';
 
 function OrderModal({ isOpen, onClose }) {
     const [selectedService, setSelectedService] = useState(''); // Предположим, можно выбрать из списка
@@ -78,7 +79,6 @@ function OrderModal({ isOpen, onClose }) {
                         readOnly // Поле только для чтения
                         className="auth-input"
                         placeholder="Выберите услугу"
-                        style={{ backgroundColor: '#f5f5f5' }}
                     />
                 </div>
 
@@ -99,16 +99,7 @@ function Service() {
             <p>Здесь будет список услуг.</p>
             <button
                 onClick={() => setIsOrderModalOpen(true)} // Открываем модальное окно
-                style={{
-                    padding: "10px 20px",
-                    fontSize: "16px",
-                    marginTop: "20px",
-                    cursor: "pointer",
-                    borderRadius: "20px",
-                    backgroundColor: "#28a745", // Зелёный цвет
-                    color: "white",
-                    border: "none",
-                }}
+                className="order-button"
             >
                 Оформить заказ
             </button>

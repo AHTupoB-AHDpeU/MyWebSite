@@ -1,6 +1,5 @@
 .footer {
     background-color: #f5f5f5; /* Светлый фон */
-    border-top: 1px solid #ddd; /* Тонкая линия сверху */
     padding: 20px 0;
     width: 100%;
 }
@@ -9,7 +8,7 @@
     display: flex;
     justify-content: space-between; /* Распределяет секции по краям и центру */
     align-items: center; /* Выравнивание по вертикали */
-    max-width: 1400px; /* Максимальная ширина */
+    max-width: 1600px; /* Максимальная ширина */
     margin: 0 auto; /* Центрирование */
     padding: 0 20px; /* Отступы по бокам */
     flex-wrap: wrap; /* Перенос строк на мобильных */
@@ -38,6 +37,7 @@
     font-size: 1.2em;
     font-weight: bold;
     text-align: left;
+    font-size: 20px;
 }
 
 .nav-section {
@@ -45,6 +45,7 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 15px;
+    font-size: 20px;
 }
 
     .nav-section a {
@@ -61,6 +62,7 @@
     text-align: right; /* Выравнивание вправо */
     font-size: 0.8em;
     color: #666;
+    font-size: 12px;
 }
 
     .legal-section a {

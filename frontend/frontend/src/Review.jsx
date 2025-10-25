@@ -1,5 +1,6 @@
 ﻿import React, { useState } from 'react';
 import Modal from './Modal';
+import './Review.css';
 
 function ReviewModal({ isOpen, onClose }) {
     const [serviceName, setServiceName] = useState('');
@@ -75,21 +76,11 @@ function ReviewModal({ isOpen, onClose }) {
 
 function Review() {
     const [isReviewModalOpen, setIsReviewModalOpen] = useState(false); // Состояние модального окна
-
     return (
         <div style={{ padding: "20px", textAlign: "center" }}>
             <button
                 onClick={() => setIsReviewModalOpen(true)} // Открываем модальное окно
-                style={{
-                    padding: "10px 20px",
-                    fontSize: "16px",
-                    marginBottom: "20px",
-                    cursor: "pointer",
-                    borderRadius: "20px",
-                    backgroundColor: "#007bff",
-                    color: "white",
-                    border: "none",
-                }}
+                className="review-button"
             >
                 Оставить отзыв
             </button>

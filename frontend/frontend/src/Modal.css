@@ -1,3 +1,53 @@
+/* Анимации для модального окна */
+@keyframes modalAppear {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) translateY(20px);
+    }
+
+    70% {
+        opacity: 1;
+        transform: scale(1.05) translateY(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes modalDisappear {
+    0% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0.8) translateY(20px);
+    }
+}
+
+@keyframes overlayAppear {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes overlayDisappear {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -9,7 +59,12 @@
     justify-content: center;
     align-items: center;
     z-index: 10000;
+    animation: overlayAppear 0.3s ease-out forwards;
 }
+
+    .modal-overlay.closing {
+        animation: overlayDisappear 0.25s ease-in forwards;
+    }
 
 .modal-content {
     background: white;
@@ -21,12 +76,18 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
     color: #000;
+    animation: modalAppear 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    transform-origin: center center;
 }
+
+    .modal-content.closing {
+        animation: modalDisappear 0.3s ease-in forwards;
+    }
 
 .modal-close-btn {
     position: absolute;
     top: 30px;
-    right: 20px;
+    right: 33px;
     width: 30px;
     height: 30px;
     display: flex;
@@ -50,11 +111,19 @@
 }
 
 .modal-body {
-    margin-top: 30px;
-    padding: 0 20px 20px 20px;
+    margin-top: 0px;
+    padding: 0 20px 7px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.modal-content h2 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 7px;
+    font-family: inherit;
 }
 
 /* Стили для группы поля ввода */
@@ -87,7 +156,14 @@
     overflow: hidden;
     height: 40px;
     font-family: inherit;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
+
+    .auth-input:focus {
+        border-color: #8A2BE2;
+        box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.1);
+        outline: none;
+    }
 
 /* Стили для кнопки */
 .auth-button {
@@ -95,17 +171,22 @@
     font-size: 16px;
     border: none;
     border-radius: 20px;
-    background-color: #007bff;
+    background-color: #8A2BE2;
     color: white;
     cursor: pointer;
     width: 100%;
     max-width: 400px; /* Чтобы кнопка была по ширине полей */
     margin-bottom: 15px; /* Отступ между кнопкой и надписью снизу */
     font-family: inherit;
+    transition: background-color 0.5s ease;
 }
 
     .auth-button:hover {
-        background-color: #0056b3;
+        background-color: #4B0082;
+    }
+
+    .auth-button:focus {
+        outline: none;
     }
 
 /* Стили для надписи-ссылки внизу формы */

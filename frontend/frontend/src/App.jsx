@@ -91,11 +91,12 @@ function PageTitle() {
 
     useEffect(() => {
         const titles = {
-            '/': 'Сайт',
+            '/': 'Грузоперевозки лесоматериалов - ИП Антипов А.В.',
             '/about': 'О нас',
             '/contact': 'Контакты',
             '/review': 'Отзывы',
             '/service': 'Услуги',
+            '/faq': 'FAQ',
         };
 
         const title = titles[location.pathname];
@@ -174,62 +175,69 @@ function AppContent() {
     return (
         <>
             <PageTitle />
+            {/* Меню */}
+            <div style={{ maxWidth: "1600px", width: "100%", padding: "0 20px", boxSizing: "border-box", margin: " auto" }}>
+                <div style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    padding: '20px 0',
+                }}>
+                    {/* Название сайта слева */}
+                    <div style={{
+                        fontSize: '30px',
+                        fontWeight: 'bold',
+                        color: '#000',
+                        fontFamily: 'Oswald, sans-serif',
+                    }}>
+                        <Link to="/" style={{ textDecoration: 'none', color: 'inherit', fontFamily: 'Oswald, sans-serif' }}>
+                            "ИП Антипов Александр Васильевич"
+                        </Link>
+                    </div>
 
-            {/* Меню справа сверху с отступом в % */}
-            <div style={{
-                position: 'fixed',
-                top: '3%',
-                left: '3%',
-                zIndex: 1001,
-                fontSize: '24px',
-                fontWeight: 'bold',
-                color: '#000',
-            }}>
-                <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-                    "ИП Антипов Александр Васильевич" {/* Замени на реальное название */}
-                </Link>
+                    {/* Меню справа */}
+                    <div style={{
+                        display: 'flex',
+                        gap: '10px', // Отступ между кнопками
+                        fontFamily: 'Oswald, sans-serif',
+                    }}>
+                        <Link to="/">
+                            <button style={{ borderRadius: "30px", padding: '8px 16px', fontSize: '30px', background: 'none', border: 'none', outline: 'none' }}>Главная</button>
+                        </Link>
+                        <Link to="/about">
+                            <button style={{ borderRadius: "30px", padding: '8px 16px', fontSize: '30px', background: 'none', border: 'none', outline: 'none' }}>О нас</button>
+                        </Link>
+                        <Link to="/contact">
+                            <button style={{ borderRadius: "30px", padding: '8px 16px', fontSize: '30px', background: 'none', border: 'none', outline: 'none' }}>Контакты</button>
+                        </Link>
+                        <Link to="/review">
+                            <button style={{ borderRadius: "30px", padding: '8px 16px', fontSize: '30px', background: 'none', border: 'none', outline: 'none' }}>Отзывы</button>
+                        </Link>
+                        <Link to="/service">
+                            <button style={{ borderRadius: "30px", padding: '8px 16px', fontSize: '30px', background: 'none', border: 'none', outline: 'none' }}>Услуги</button>
+                        </Link>
+                        <button
+                            onClick={() => setIsModalOpen(true)}
+                            style={{ borderRadius: "30px", padding: '8px 50px', fontSize: '30px', background: "#FFD700", marginLeft: '30px', outline: 'none', border: 'none', }}
+                        >
+                            Заказать услугу
+                        </button>
+                    </div>
+                </div>
             </div>
 
-            <div style={{
-                position: 'fixed',
-                top: '3%',
-                right: '3%',
-                display: 'flex',
-                gap: '15px',
-                zIndex: 1001
-            }}>
-                <Link to="/">
-                    <button style={{ borderRadius: "20px", padding: '8px 16px', fontSize: '14px' }}>Главная</button>
-                </Link>
-                <Link to="/about">
-                    <button style={{ borderRadius: "20px", padding: '8px 16px', fontSize: '14px' }}>О нас</button>
-                </Link>
-                <Link to="/contact">
-                    <button style={{ borderRadius: "20px", padding: '8px 16px', fontSize: '14px' }}>Контакты</button>
-                </Link>
-                <Link to="/review">
-                    <button style={{ borderRadius: "20px", padding: '8px 16px', fontSize: '14px' }}>Отзывы</button>
-                </Link>
-                <Link to="/service">
-                    <button style={{ borderRadius: "20px", padding: '8px 16px', fontSize: '14px' }}>Услуги</button>
-                </Link>
-                <button
-                    onClick={() => setIsModalOpen(true)}
-                    style={{ borderRadius: "20px", padding: '8px 16px', fontSize: '14px' }}
-                >
-                    Заказать услуги
-                </button>
-            </div>
-
-            <div style={{ width: "100%", minHeight: "calc(100vh - 60px)", display: "flex", justifyContent: "center", alignItems: "center" }}>
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/about" element={<About />} />
-                    <Route path="/contact" element={<Contact />} />
-                    <Route path="/review" element={<Review />} />
-                    <Route path="/service" element={<Service />} />
-                    <Route path="/faq" element={<FAQ />} />
-                </Routes>
+            <div style={{ width: "100%", minHeight: "calc(80vh)", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                {/* Контент */}
+                <div style={{ maxWidth: "1600px", width: "100%", padding: "0 20px 40px", boxSizing: "border-box" }}>
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/about" element={<About />} />
+                        <Route path="/contact" element={<Contact />} />
+                        <Route path="/review" element={<Review />} />
+                        <Route path="/service" element={<Service />} />
+                        <Route path="/faq" element={<FAQ />} />
+                    </Routes>
+                </div>
             </div>
 
             {/* Модальное окно */}

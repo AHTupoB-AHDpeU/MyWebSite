@@ -1,10 +1,19 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './Modal.css'; // Подключим стили
 
 const Modal = ({ isOpen, onClose, children }) => {
+    const [isClosing, setIsClosing] = useState(false);
+
     useEffect(() => {
+        if (!isOpen) {
+            setIsClosing(false);
+            return;
+        }
+
         const closeOnEscape = (e) => {
-            if (e.key === 'Escape') onClose();
+            if (e.key === 'Escape') {
+                handleClose();
+            }
         };
 
         let originalPaddingRight;
@@ -25,16 +34,24 @@ const Modal = ({ isOpen, onClose, children }) => {
             document.removeEventListener('keydown', closeOnEscape);
             document.body.style.overflow = 'unset'; // Возвращаем прокрутку
             const targetElement = document.documentElement;
-            targetElement.style.paddingRight = originalPaddingRight;
+            targetElement.style.paddingRight = originalPaddingRight || '';
         };
-    }, [isOpen, onClose]);
+    }, [isOpen]);
 
-    if (!isOpen) return null;
+    const handleClose = () => {
+        setIsClosing(true);
+        // Ждем завершения анимации перед вызовом onClose
+        setTimeout(() => {
+            onClose();
+        }, 300); // Должно совпадать с длительностью анимации закрытия в CSS
+    };
+
+    if (!isOpen && !isClosing) return null;
 
     return (
-        <div className="modal-overlay" onClick={onClose}>
-            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                <button className="modal-close-btn" onClick={onClose}>
+        <div className={`modal-overlay ${isClosing ? 'closing' : ''}`} onClick={handleClose}>
+            <div className={`modal-content ${isClosing ? 'closing' : ''}`} onClick={(e) => e.stopPropagation()}>
+                <button className="modal-close-btn" onClick={handleClose}>
                     <img width="50" height="50" src="https://img.icons8.com/ios-filled/50/FAB005/cancel.png" alt="cancel" />
                 </button>
                 <div className="modal-body">
