@@ -1,0 +1,190 @@
+.home-page {
+    min-height: 100vh;
+    padding: 32px 80px 32px 80px;
+    background-color: #f8fafc;
+    border-radius: 32px;
+}
+
+.home-container {
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.home-image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.home-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 30px;
+}
+
+/* Секция с кнопкой перехода к услугам */
+.services-cta-section {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+}
+
+.services-cta-button {
+    padding: 16px 36px;
+    font-size: 20px;
+    border: none;
+    border-radius: 32px;
+    background-color: #8A2BE2;
+    color: white;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+}
+
+    .services-cta-button:hover {
+        background-color: #4B0082;
+    }
+
+    .services-cta-button:focus {
+        outline: none;
+    }
+
+/* Секция карусели отзывов */
+.reviews-carousel-section {
+    margin-top: 0px;
+}
+
+.reviews-carousel-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #1f2937;
+    text-align: center;
+    margin-bottom: 0px;
+}
+
+.reviews-carousel {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 20px 10px;
+    scrollbar-width: thin;
+    scrollbar-color: #8A2BE2 #f1f1f1;
+}
+
+    .reviews-carousel::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .reviews-carousel::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+    }
+
+    .reviews-carousel::-webkit-scrollbar-thumb {
+        background: #8A2BE2;
+        border-radius: 10px;
+    }
+
+        .reviews-carousel::-webkit-scrollbar-thumb:hover {
+            background: #4B0082;
+        }
+
+/* Карточка отзыва в карусели */
+.review-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    min-width: 300px;
+    max-width: 300px;
+    flex-shrink: 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .review-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+.review-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.review-card-author {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0;
+}
+
+.review-card-rating {
+    font-size: 14px;
+}
+
+.review-card-service {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.review-card-text {
+    font-size: 14px;
+    color: #374151;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.review-card-date {
+    font-size: 12px;
+    color: #9ca3af;
+    text-align: right;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .home-page {
+        padding: 24px 20px;
+    }
+
+    .services-cta-button {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .reviews-carousel-title {
+        font-size: 24px;
+    }
+
+    .review-card {
+        min-width: 280px;
+        max-width: 280px;
+    }
+}
+
+@media (max-width: 480px) {
+    .home-page {
+        padding: 16px 12px;
+    }
+
+    .reviews-carousel {
+        gap: 15px;
+    }
+
+    .review-card {
+        min-width: 260px;
+        max-width: 260px;
+        padding: 16px;
+    }
+}

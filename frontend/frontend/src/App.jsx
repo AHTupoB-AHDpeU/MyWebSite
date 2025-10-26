@@ -8,6 +8,9 @@ import Service from "./Service";
 import Modal from './Modal';
 import FAQ from "./faq";
 import Footer from './Footer';
+import Privace from "./Privace";
+
+import ScrollToTop from './components/ScrollToTop';
 
 function AuthModal({ isOpen, onClose }) {
     const [isLogin, setIsLogin] = useState(true); // true = вход, false = регистрация
@@ -97,6 +100,7 @@ function PageTitle() {
             '/review': 'Отзывы',
             '/service': 'Услуги',
             '/faq': 'FAQ',
+            '/privace': 'Политика конфиденциальности',
         };
 
         const title = titles[location.pathname];
@@ -176,7 +180,7 @@ function AppContent() {
         <>
             <PageTitle />
             {/* Меню */}
-            <div style={{ maxWidth: "1600px", width: "100%", padding: "0 20px", boxSizing: "border-box", margin: " auto" }}>
+            <div style={{ maxWidth: "1600px", width: "100%", padding: "0 20px", boxSizing: "border-box", margin: "auto" }}>
                 <div style={{
                     display: 'flex',
                     justifyContent: 'space-between',
@@ -190,7 +194,7 @@ function AppContent() {
                         color: '#000',
                         fontFamily: 'Oswald, sans-serif',
                     }}>
-                        <Link to="/" style={{ textDecoration: 'none', color: 'inherit', fontFamily: 'Oswald, sans-serif' }}>
+                        <Link to="/" style={{ textDecoration: 'none', color: '#1f2937', fontFamily: 'Oswald, sans-serif' }}>
                             "ИП Антипов Александр Васильевич"
                         </Link>
                     </div>
@@ -202,23 +206,29 @@ function AppContent() {
                         fontFamily: 'Oswald, sans-serif',
                     }}>
                         <Link to="/">
-                            <button style={{ borderRadius: "30px", padding: '8px 16px', fontSize: '30px', background: 'none', border: 'none', outline: 'none' }}>Главная</button>
+                            <button style={{ borderRadius: "30px", padding: '8px 16px', fontSize: '30px', background: 'none', border: 'none', outline: 'none', color: '#1f2937' }}>Главная</button>
                         </Link>
                         <Link to="/about">
-                            <button style={{ borderRadius: "30px", padding: '8px 16px', fontSize: '30px', background: 'none', border: 'none', outline: 'none' }}>О нас</button>
+                            <button style={{ borderRadius: "30px", padding: '8px 16px', fontSize: '30px', background: 'none', border: 'none', outline: 'none', color: '#1f2937' }}>О нас</button>
                         </Link>
                         <Link to="/contact">
-                            <button style={{ borderRadius: "30px", padding: '8px 16px', fontSize: '30px', background: 'none', border: 'none', outline: 'none' }}>Контакты</button>
+                            <button style={{ borderRadius: "30px", padding: '8px 16px', fontSize: '30px', background: 'none', border: 'none', outline: 'none', color: '#1f2937' }}>Контакты</button>
                         </Link>
                         <Link to="/review">
-                            <button style={{ borderRadius: "30px", padding: '8px 16px', fontSize: '30px', background: 'none', border: 'none', outline: 'none' }}>Отзывы</button>
+                            <button style={{ borderRadius: "30px", padding: '8px 16px', fontSize: '30px', background: 'none', border: 'none', outline: 'none', color: '#1f2937' }}>Отзывы</button>
                         </Link>
                         <Link to="/service">
-                            <button style={{ borderRadius: "30px", padding: '8px 16px', fontSize: '30px', background: 'none', border: 'none', outline: 'none' }}>Услуги</button>
+                            <button style={{ borderRadius: "30px", padding: '8px 16px', fontSize: '30px', background: 'none', border: 'none', outline: 'none', color: '#1f2937' }}>Услуги</button>
                         </Link>
                         <button
                             onClick={() => setIsModalOpen(true)}
-                            style={{ borderRadius: "30px", padding: '8px 50px', fontSize: '30px', background: "#FFD700", marginLeft: '30px', outline: 'none', border: 'none', }}
+                            style={{ borderRadius: "30px", padding: '8px 50px', fontSize: '30px', background: "#FFD700", marginLeft: '30px', outline: 'none', border: 'none', color: '#1f2937', cursor: 'pointer', transition: 'box-shadow 0.3s ease' }}
+                            onMouseEnter={(e) => {
+                                e.target.style.boxShadow = '0 0 0 3px #8A2BE2';
+                            }}
+                            onMouseLeave={(e) => {
+                                e.target.style.boxShadow = 'none';
+                            }}
                         >
                             Заказать услугу
                         </button>
@@ -236,6 +246,7 @@ function AppContent() {
                         <Route path="/review" element={<Review />} />
                         <Route path="/service" element={<Service />} />
                         <Route path="/faq" element={<FAQ />} />
+                        <Route path="/privace" element={<Privace />} />
                     </Routes>
                 </div>
             </div>
@@ -252,6 +263,7 @@ function AppContent() {
 function App() {
     return (
         <Router>
+            <ScrollToTop />
             <AppContent />
         </Router>
     );

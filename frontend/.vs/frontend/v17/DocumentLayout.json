@@ -5,10 +5,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{462EE049-9FE1-B47D-1B3E-22BACA5D9185}|frontend\\frontend.esproj|c:\\users\\\u0430\u043D\u0434\u0440\u0435\u0439\\source\\repos\\frontend\\frontend\\src\\app.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{462EE049-9FE1-B47D-1B3E-22BACA5D9185}|frontend\\frontend.esproj|solutionrelative:frontend\\src\\app.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{462EE049-9FE1-B47D-1B3E-22BACA5D9185}|frontend\\frontend.esproj|c:\\users\\\u0430\u043D\u0434\u0440\u0435\u0439\\source\\repos\\frontend\\frontend\\src\\home.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{462EE049-9FE1-B47D-1B3E-22BACA5D9185}|frontend\\frontend.esproj|solutionrelative:frontend\\src\\home.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     }
   ],
   "DocumentGroupContainers": [
@@ -28,23 +24,10 @@
               "RelativeDocumentMoniker": "frontend\\src\\App.jsx",
               "ToolTip": "C:\\Users\\\u0410\u043D\u0434\u0440\u0435\u0439\\source\\repos\\frontend\\frontend\\src\\App.jsx",
               "RelativeToolTip": "frontend\\src\\App.jsx",
-              "ViewState": "AgIAAI0AAAAAAAAAAAAYwJYAAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAAE0AAAAAAAAAAAAAwF0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
               "WhenOpened": "2025-10-18T19:32:18.13Z",
               "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Home.jsx",
-              "DocumentMoniker": "C:\\Users\\\u0410\u043D\u0434\u0440\u0435\u0439\\source\\repos\\frontend\\frontend\\src\\Home.jsx",
-              "RelativeDocumentMoniker": "frontend\\src\\Home.jsx",
-              "ToolTip": "C:\\Users\\\u0410\u043D\u0434\u0440\u0435\u0439\\source\\repos\\frontend\\frontend\\src\\Home.jsx",
-              "RelativeToolTip": "frontend\\src\\Home.jsx",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
-              "WhenOpened": "2025-10-25T20:04:26.289Z",
               "EditorCaption": ""
             },
             {

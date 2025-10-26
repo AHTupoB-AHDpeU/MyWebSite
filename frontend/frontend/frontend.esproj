@@ -14,4 +14,11 @@
     <TypeScriptConfiguration Remove="src\Новая папка1\**" />
     <TypeScriptConfiguration Remove="src\Новая папка\**" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="src\components\ScrollFloat.css" />
+    <None Remove="src\components\ScrollFloat.jsx" />
+    <None Remove="src\components\ScrollFloatt.css" />
+    <None Remove="src\ScrollToTop.js" />
+    <None Remove="src\ScrollToTop.jsx" />
+  </ItemGroup>
 </Project>

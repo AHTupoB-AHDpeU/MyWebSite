@@ -1,0 +1,59 @@
+.privace-page {
+    min-height: 85vh;
+    padding: 32px 80px 32px 80px;
+    background-color: #f8fafc;
+    border-radius: 32px;
+}
+
+.privace-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.privace-header {
+    margin-top: 4px;
+    margin-bottom: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.privace-title {
+    font-size: 36px;
+    font-weight: bold;
+    margin: 32px;
+    color: #1f2937;
+}
+
+.privace-content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 24px;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .privace-page {
+        padding: 24px 20px;
+    }
+
+    .privace-title {
+        font-size: 28px;
+        margin: 24px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .privace-page {
+        padding: 16px 12px;
+    }
+
+    .privace-title {
+        font-size: 24px;
+        margin: 20px 0;
+    }
+}

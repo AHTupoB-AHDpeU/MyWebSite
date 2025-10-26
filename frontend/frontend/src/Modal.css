@@ -69,13 +69,13 @@
 .modal-content {
     background: white;
     padding: 20px;
-    border-radius: 50px;
+    border-radius: 32px;
     width: 90%;
     max-width: 400px;
     position: relative;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
-    color: #000;
+    color: #1f2937;
     animation: modalAppear 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     transform-origin: center center;
 }
@@ -140,7 +140,7 @@
         text-align: left;
         margin-bottom: 5px;
         font-size: 14px;
-        color: #333;
+        color: #1f2937;
     }
 
 /* Стили для полей ввода */
@@ -157,6 +157,7 @@
     height: 40px;
     font-family: inherit;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    color: #1f2937;
 }
 
     .auth-input:focus {
