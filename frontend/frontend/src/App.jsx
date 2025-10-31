@@ -100,7 +100,7 @@ function PageTitle() {
             '/review': 'Отзывы',
             '/service': 'Услуги',
             '/faq': 'FAQ',
-            '/privace': 'Политика конфиденциальности',
+            '/privacy': 'Политика конфиденциальности',
         };
 
         const title = titles[location.pathname];
@@ -113,6 +113,15 @@ function PageTitle() {
 function AppContent() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+    };
+
+    const closeMobileMenu = () => {
+        setIsMobileMenuOpen(false);
+    };
 
     const ProfileModal = ({ isOpen, onClose }) => {
 
@@ -179,6 +188,159 @@ function AppContent() {
     return (
         <>
             <PageTitle />
+            {/* Стили для мобильного меню */}
+            <style>
+                {`
+                .desktop-menu {
+                    display: flex;
+                    gap: 10px;
+                    font-family: 'Oswald', sans-serif;
+                }
+                
+                .mobile-menu-button {
+                    display: none;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    width: 30px;
+                    height: 21px;
+                    background: none;
+                    border: none;
+                    cursor: pointer;
+                    padding: 0;
+                }
+                
+                .mobile-menu-button span {
+                    display: block;
+                    height: 3px;
+                    width: 100%;
+                    background-color: #1f2937;
+                    border-radius: 3px;
+                    transition: all 0.3s ease;
+                }
+                
+                .mobile-menu-button.active span:nth-child(1) {
+                    transform: rotate(45deg) translate(6px, 6px);
+                }
+                
+                .mobile-menu-button.active span:nth-child(2) {
+                    opacity: 0;
+                }
+                
+                .mobile-menu-button.active span:nth-child(3) {
+                    transform: rotate(-45deg) translate(6px, -6px);
+                }
+
+                .mobile-menu-button:focus,
+                .mobile-menu-button:active,
+                .mobile-menu-button:focus-visible {
+                    outline: none !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                }
+                
+                .mobile-menu-overlay {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    z-index: 999;
+                }
+                
+                .mobile-menu-content {
+                    position: fixed;
+                    top: 0;
+                    right: -100%;
+                    width: 280px;
+                    height: 100vh;
+                    background-color: #ffffff;
+                    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+                    transition: right 0.3s ease;
+                    z-index: 1000;
+                    padding: 80px 20px 20px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                }
+                
+                .mobile-menu-content.open {
+                    right: 0;
+                }
+                
+                .mobile-nav-button {
+                    border-radius: 30px;
+                    padding: 16px 20px;
+                    font-size: 30px;
+                    background: none;
+                    border: none;
+                    outline: none;
+                    color: #1f2937;
+                    cursor: pointer;
+                    text-align: left;
+                    transition: all 0.3s ease;
+                    font-family: 'Oswald', sans-serif;
+                }
+
+                .mobile-nav-button:focus,
+                .mobile-nav-button:active,
+                .mobile-nav-button:focus-visible {
+                    outline: none !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                    background: none !important;
+                }
+                
+                .mobile-nav-button:hover {
+                    background-color: #f3f4f6;
+                    color: #8A2BE2;
+                }
+                
+                .mobile-order-button {
+                    border-radius: 30px;
+                    padding: 16px 20px;
+                    font-size: 30px;
+                    background: #FFD700;
+                    border: none;
+                    outline: none;
+                    color: #1f2937;
+                    cursor: pointer;
+                    text-align: center;
+                    transition: all 0.3s ease;
+                    font-family: 'Oswald', sans-serif;
+                    margin-top: 20px;
+                }
+
+                .mobile-order-button:focus,
+                .mobile-order-button:active,
+                .mobile-order-button:focus-visible {
+                    outline: none !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                }
+                
+                .mobile-order-button:hover {
+                    box-shadow: 0 0 0 3px #8A2BE2;
+                }
+                
+                @media (max-width: 994px) {
+                    .desktop-menu {
+                        display: none;
+                    }
+                    
+                    .mobile-menu-button {
+                        display: flex;
+                    }
+                }
+                
+                @media (min-width: 995px) {
+                    .mobile-menu-button {
+                        display: none;
+                    }
+                }
+                `}
+            </style>
+
             {/* Меню */}
             <div style={{ maxWidth: "1600px", width: "100%", padding: "0 20px", boxSizing: "border-box", margin: "auto" }}>
                 <div style={{
@@ -186,6 +348,7 @@ function AppContent() {
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     padding: '20px 0',
+                    position: 'relative'
                 }}>
                     {/* Название сайта слева */}
                     <div style={{
@@ -199,26 +362,22 @@ function AppContent() {
                         </Link>
                     </div>
 
-                    {/* Меню справа */}
-                    <div style={{
-                        display: 'flex',
-                        gap: '10px', // Отступ между кнопками
-                        fontFamily: 'Oswald, sans-serif',
-                    }}>
+                    {/* Десктопное меню справа */}
+                    <div className="desktop-menu">
                         <Link to="/">
-                            <button style={{ borderRadius: "30px", padding: '8px 16px', fontSize: '30px', background: 'none', border: 'none', outline: 'none', color: '#1f2937' }}>Главная</button>
+                            <button className="nav-button">Главная</button>
                         </Link>
                         <Link to="/about">
-                            <button style={{ borderRadius: "30px", padding: '8px 16px', fontSize: '30px', background: 'none', border: 'none', outline: 'none', color: '#1f2937' }}>О нас</button>
+                            <button className="nav-button">О нас</button>
                         </Link>
                         <Link to="/contact">
-                            <button style={{ borderRadius: "30px", padding: '8px 16px', fontSize: '30px', background: 'none', border: 'none', outline: 'none', color: '#1f2937' }}>Контакты</button>
+                            <button className="nav-button">Контакты</button>
                         </Link>
                         <Link to="/review">
-                            <button style={{ borderRadius: "30px", padding: '8px 16px', fontSize: '30px', background: 'none', border: 'none', outline: 'none', color: '#1f2937' }}>Отзывы</button>
+                            <button className="nav-button">Отзывы</button>
                         </Link>
                         <Link to="/service">
-                            <button style={{ borderRadius: "30px", padding: '8px 16px', fontSize: '30px', background: 'none', border: 'none', outline: 'none', color: '#1f2937' }}>Услуги</button>
+                            <button className="nav-button">Услуги</button>
                         </Link>
                         <button
                             onClick={() => setIsModalOpen(true)}
@@ -233,7 +392,49 @@ function AppContent() {
                             Заказать услугу
                         </button>
                     </div>
+
+                    {/* Кнопка мобильного меню */}
+                    <button
+                        className={`mobile-menu-button ${isMobileMenuOpen ? 'active' : ''}`}
+                        onClick={toggleMobileMenu}
+                        aria-label="Меню"
+                    >
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
                 </div>
+            </div>
+
+            {/* Мобильное меню */}
+            {isMobileMenuOpen && (
+                <div className="mobile-menu-overlay" onClick={closeMobileMenu}></div>
+            )}
+            <div className={`mobile-menu-content ${isMobileMenuOpen ? 'open' : ''}`}>
+                <Link to="/" onClick={closeMobileMenu}>
+                    <button className="mobile-nav-button">Главная</button>
+                </Link>
+                <Link to="/about" onClick={closeMobileMenu}>
+                    <button className="mobile-nav-button">О нас</button>
+                </Link>
+                <Link to="/contact" onClick={closeMobileMenu}>
+                    <button className="mobile-nav-button">Контакты</button>
+                </Link>
+                <Link to="/review" onClick={closeMobileMenu}>
+                    <button className="mobile-nav-button">Отзывы</button>
+                </Link>
+                <Link to="/service" onClick={closeMobileMenu}>
+                    <button className="mobile-nav-button">Услуги</button>
+                </Link>
+                <button
+                    className="mobile-order-button"
+                    onClick={() => {
+                        closeMobileMenu();
+                        setIsModalOpen(true);
+                    }}
+                >
+                    Заказать услугу
+                </button>
             </div>
 
             <div style={{ width: "100%", minHeight: "calc(80vh)", display: "flex", justifyContent: "center", alignItems: "center" }}>
@@ -246,7 +447,7 @@ function AppContent() {
                         <Route path="/review" element={<Review />} />
                         <Route path="/service" element={<Service />} />
                         <Route path="/faq" element={<FAQ />} />
-                        <Route path="/privace" element={<Privace />} />
+                        <Route path="/privacy" element={<Privace />} />
                     </Routes>
                 </div>
             </div>

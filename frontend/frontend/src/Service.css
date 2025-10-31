@@ -44,7 +44,7 @@
     padding: 12px 20px;
     font-size: 16px;
     border: 2px solid #e5e7eb;
-    border-radius: 32px;
+    border-radius: 30px;
     background-color: white;
     width: 300px;
     transition: border-color 0.3s ease;
@@ -59,7 +59,7 @@
     padding: 12px 24px;
     font-size: 16px;
     border: none;
-    border-radius: 32px;
+    border-radius: 30px;
     background-color: #8A2BE2;
     color: white;
     cursor: pointer;
@@ -168,7 +168,7 @@
     padding: 16px 36px;
     font-size: 20px;
     border: none;
-    border-radius: 32px;
+    border-radius: 30px;
     background-color: #8A2BE2;
     color: white;
     cursor: pointer;

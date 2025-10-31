@@ -61,7 +61,7 @@
         font-size: 18px;
         font-weight: 500;
         padding: 8px 16px;
-        border-radius: 32px;
+        border-radius: 30px;
         transition: all 0.3s ease;
         white-space: nowrap;
     }
@@ -107,44 +107,24 @@
     line-height: 1.4;
 }
 
-/* Нижняя часть подвала */
-.footer-bottom {
-    max-width: 1600px;
-    margin: 40px auto 0 auto;
-    padding: 20px 80px 0 80px;
-    border-top: 1px solid #e5e7eb;
-    text-align: center;
-}
-
-.footer-bottom-text {
-    font-size: 14px;
-    color: #6b7280;
-    margin: 0;
-}
-
-/* Адаптивность */
-@media (max-width: 1024px) {
-    .footer-container {
-        padding: 0 40px;
-        gap: 30px;
-    }
-
-    .footer-bottom {
-        padding: 20px 40px 0 40px;
-    }
-}
-
-@media (max-width: 768px) {
+/* Адаптивность - теперь все элементы всегда в колонке на мобильных */
+@media (max-width: 1200px) {
     .footer-container {
         flex-direction: column;
+        align-items: center;
         text-align: center;
-        padding: 0 20px;
         gap: 30px;
+    }
+
+    .footer-section {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .logo-section {
         align-items: center;
-        text-align: center;
     }
 
     .site-name {
@@ -153,10 +133,27 @@
 
     .legal-section {
         text-align: center;
+        align-items: center;
     }
 
     .nav-section {
         justify-content: center;
+    }
+}
+
+@media (max-width: 1024px) {
+    .footer-container {
+        padding: 0 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        padding: 0 20px;
+        gap: 30px;
+    }
+
+    .nav-section {
         gap: 10px;
     }
 
@@ -164,16 +161,11 @@
             font-size: 14px;
             padding: 6px 12px;
         }
-
-    .footer-bottom {
-        padding: 20px 20px 0 20px;
-    }
 }
 
 @media (max-width: 480px) {
     .footer {
         padding: 30px 0 15px 0;
-        margin-top: 40px;
     }
 
     .footer-container {
@@ -200,9 +192,5 @@
 
     .copyright {
         font-size: 11px;
-    }
-
-    .footer-bottom {
-        padding: 15px 16px 0 16px;
     }
 }

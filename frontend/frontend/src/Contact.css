@@ -29,7 +29,7 @@
     margin-bottom: 48px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 950px) {
     .contact-cards {
         grid-template-columns: repeat(3, 1fr);
     }

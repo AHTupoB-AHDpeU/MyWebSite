@@ -7,16 +7,8 @@
       "RelativeMoniker": "D:0:0:{462EE049-9FE1-B47D-1B3E-22BACA5D9185}|frontend\\frontend.esproj|solutionrelative:frontend\\src\\app.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{462EE049-9FE1-B47D-1B3E-22BACA5D9185}|frontend\\frontend.esproj|c:\\users\\\u0430\u043D\u0434\u0440\u0435\u0439\\source\\repos\\frontend\\frontend\\src\\components\\scrolltotop.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{462EE049-9FE1-B47D-1B3E-22BACA5D9185}|frontend\\frontend.esproj|solutionrelative:frontend\\src\\components\\scrolltotop.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{462EE049-9FE1-B47D-1B3E-22BACA5D9185}|frontend\\frontend.esproj|c:\\users\\\u0430\u043D\u0434\u0440\u0435\u0439\\source\\repos\\frontend\\frontend\\src\\footer.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{462EE049-9FE1-B47D-1B3E-22BACA5D9185}|frontend\\frontend.esproj|solutionrelative:frontend\\src\\footer.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{462EE049-9FE1-B47D-1B3E-22BACA5D9185}|frontend\\frontend.esproj|c:\\users\\\u0430\u043D\u0434\u0440\u0435\u0439\\source\\repos\\frontend\\frontend\\src\\review.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{462EE049-9FE1-B47D-1B3E-22BACA5D9185}|frontend\\frontend.esproj|solutionrelative:frontend\\src\\review.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+      "AbsoluteMoniker": "D:0:0:{462EE049-9FE1-B47D-1B3E-22BACA5D9185}|frontend\\frontend.esproj|c:\\users\\\u0430\u043D\u0434\u0440\u0435\u0439\\source\\repos\\frontend\\frontend\\src\\components\\splittext.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{462EE049-9FE1-B47D-1B3E-22BACA5D9185}|frontend\\frontend.esproj|solutionrelative:frontend\\src\\components\\splittext.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     }
   ],
   "DocumentGroupContainers": [
@@ -36,7 +28,7 @@
               "RelativeDocumentMoniker": "frontend\\src\\App.jsx",
               "ToolTip": "C:\\Users\\\u0410\u043D\u0434\u0440\u0435\u0439\\source\\repos\\frontend\\frontend\\src\\App.jsx",
               "RelativeToolTip": "frontend\\src\\App.jsx",
-              "ViewState": "AgIAAOEAAAAAAAAAAAAYwAMBAAAbAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
               "WhenOpened": "2025-10-18T19:32:18.13Z",
               "IsPinned": true,
@@ -45,40 +37,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ScrollToTop.jsx",
-              "DocumentMoniker": "C:\\Users\\\u0410\u043D\u0434\u0440\u0435\u0439\\source\\repos\\frontend\\frontend\\src\\components\\ScrollToTop.jsx",
-              "RelativeDocumentMoniker": "frontend\\src\\components\\ScrollToTop.jsx",
-              "ToolTip": "C:\\Users\\\u0410\u043D\u0434\u0440\u0435\u0439\\source\\repos\\frontend\\frontend\\src\\components\\ScrollToTop.jsx",
-              "RelativeToolTip": "frontend\\src\\components\\ScrollToTop.jsx",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAbAAAAAAAAAA==",
+              "Title": "SplitText.jsx",
+              "DocumentMoniker": "C:\\Users\\\u0410\u043D\u0434\u0440\u0435\u0439\\source\\repos\\frontend\\frontend\\src\\components\\SplitText.jsx",
+              "RelativeDocumentMoniker": "frontend\\src\\components\\SplitText.jsx",
+              "ToolTip": "C:\\Users\\\u0410\u043D\u0434\u0440\u0435\u0439\\source\\repos\\frontend\\frontend\\src\\components\\SplitText.jsx",
+              "RelativeToolTip": "frontend\\src\\components\\SplitText.jsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
-              "WhenOpened": "2025-10-26T15:32:03.415Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Review.css",
-              "DocumentMoniker": "C:\\Users\\\u0410\u043D\u0434\u0440\u0435\u0439\\source\\repos\\frontend\\frontend\\src\\Review.css",
-              "RelativeDocumentMoniker": "frontend\\src\\Review.css",
-              "ToolTip": "C:\\Users\\\u0410\u043D\u0434\u0440\u0435\u0439\\source\\repos\\frontend\\frontend\\src\\Review.css",
-              "RelativeToolTip": "frontend\\src\\Review.css",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-10-26T15:04:59.679Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Footer.css",
-              "DocumentMoniker": "C:\\Users\\\u0410\u043D\u0434\u0440\u0435\u0439\\source\\repos\\frontend\\frontend\\src\\Footer.css",
-              "RelativeDocumentMoniker": "frontend\\src\\Footer.css",
-              "ToolTip": "C:\\Users\\\u0410\u043D\u0434\u0440\u0435\u0439\\source\\repos\\frontend\\frontend\\src\\Footer.css",
-              "RelativeToolTip": "frontend\\src\\Footer.css",
-              "ViewState": "AgIAAKcAAAAAAAAAAAAiwLYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-10-26T14:57:01.895Z",
+              "WhenOpened": "2025-10-31T16:34:32.876Z",
               "EditorCaption": ""
             },
             {

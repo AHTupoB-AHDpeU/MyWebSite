@@ -86,66 +86,66 @@ function Service() {
     const services = [
         {
             id: 1,
-            name: 'Услуга 1',
-            price: 1500,
+            name: 'Перевозка кругляка',
+            price: 15000,
             image: '/services/service1.jpg',
-            description: 'Подробности услуги 1'
+            description: 'Перевозка бревен и кругляка до 10 тонн'
         },
         {
             id: 2,
-            name: 'Услуга 2',
-            price: 1000,
+            name: 'Доставка пиломатериалов',
+            price: 12000,
             image: '/services/service1.jpg',
-            description: 'Подробности услуги 2'
+            description: 'Перевозка досок, бруса и других пиломатериалов до 8 тонн'
         },
         {
             id: 3,
-            name: 'Услуга 3',
-            price: 800,
+            name: 'Транспортировка дров',
+            price: 8000,
             image: '/services/service1.jpg',
-            description: 'Подробности услуги 3'
+            description: 'Доставка колотых дров и древесных отходов до 5 тонн'
         },
         {
             id: 4,
-            name: 'Услуга 4',
-            price: 500,
+            name: 'Перевозка щепы',
+            price: 10000,
             image: '/services/service1.jpg',
-            description: 'Подробности услуги 4'
+            description: 'Транспортировка древесной щепы и опилок с защитой от потерь'
         },
         {
             id: 5,
-            name: 'Услуга 5',
-            price: 1200,
+            name: 'Срочная доставка',
+            price: 18000,
             image: '/services/service1.jpg',
-            description: 'Подробности услуги 5'
+            description: 'Срочная перевозка лесоматериалов в течение 24 часов'
         },
         {
             id: 6,
-            name: 'Услуга 6',
-            price: 2000,
+            name: 'Межрегиональные перевозки',
+            price: 20000,
             image: '/services/service1.jpg',
-            description: 'Подробности услуги 6'
+            description: 'Перевозка лесоматериалов в соседние регионы (до 300 км)'
         },
         {
             id: 7,
-            name: 'Услуга 7',
-            price: 900,
+            name: 'Перевозка длинномеров',
+            price: 20000,
             image: '/services/service1.jpg',
-            description: 'Подробности услуги 7'
+            description: 'Транспортировка длинномерных лесоматериалов (до 12 метров)'
         },
         {
             id: 8,
-            name: 'Услуга 8',
-            price: 1500,
+            name: 'Услуги погрузки/разгрузки',
+            price: 5000,
             image: '/services/service1.jpg',
-            description: 'Подробности услуги 8'
+            description: 'Погрузка и разгрузка лесоматериалов с использованием техники'
         },
         {
             id: 9,
-            name: 'Услуга 9',
-            price: 2500,
+            name: 'Аренда УРАЛ с водителем',
+            price: 25000,
             image: '/services/service1.jpg',
-            description: 'Подробности услуги 9'
+            description: 'Аренда грузовика УРАЛ с опытным водителем на сутки'
         }
     ];
 

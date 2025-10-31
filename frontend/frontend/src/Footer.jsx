@@ -50,7 +50,7 @@ function Footer({ onOpenProfileModal }) {
                         ОГРНИП: {legalInfo.ogrnip}<br />
                     </p>
                     <p className="footer-links">
-                        <Link to="/privace">Политика конфиденциальности</Link>
+                        <Link to="/privacy">Политика конфиденциальности</Link>
                     </p>
                     <p className="copyright">
                         &copy; {new Date().getFullYear()} ИП Антипов Александр Васильевич - Грузоперевозки лесоматериалов.<br />

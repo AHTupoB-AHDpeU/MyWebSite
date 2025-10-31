@@ -68,7 +68,7 @@ function Home() {
         setTimeout(() => {
             setReviews(sampleReviews);
             setLoading(false);
-        }, 1000);
+        }, 100);
     }, []);
 
     // Автоматическая прокрутка карусели
@@ -176,20 +176,6 @@ function Home() {
                                     </div>
                                 ))}
                             </div>
-                        </div>
-                    )}
-
-                    {/* Индикаторы прогресса */}
-                    {!loading && (
-                        <div className="carousel-indicators">
-                            {reviews.map((_, index) => (
-                                <button
-                                    key={index}
-                                    className={`carousel-indicator ${index === currentIndex ? 'active' : ''}`}
-                                    onClick={() => setCurrentIndex(index)}
-                                    aria-label={`Перейти к отзыву ${index + 1}`}
-                                />
-                            ))}
                         </div>
                     )}
                 </div>
