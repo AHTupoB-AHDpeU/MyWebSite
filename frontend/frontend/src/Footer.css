@@ -21,7 +21,6 @@
     min-width: 250px;
 }
 
-/* Левая секция - логотип и название */
 .logo-section {
     display: flex;
     flex-direction: column;
@@ -47,7 +46,6 @@
     text-align: left;
 }
 
-/* Центральная секция - навигация (горизонтальная) */
 .nav-section {
     display: flex;
     flex-wrap: wrap;
@@ -72,7 +70,6 @@
             transform: translateY(-2px);
         }
 
-/* Правая секция - юридическая информация */
 .legal-section {
     text-align: right;
     display: flex;
@@ -107,7 +104,6 @@
     line-height: 1.4;
 }
 
-/* Адаптивность - теперь все элементы всегда в колонке на мобильных */
 @media (max-width: 1200px) {
     .footer-container {
         flex-direction: column;

@@ -15,6 +15,7 @@
     <TypeScriptConfiguration Remove="src\Новая папка\**" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="src\AuthContext.jsx" />
     <None Remove="src\components\ScrollFloat.css" />
     <None Remove="src\components\ScrollFloat.jsx" />
     <None Remove="src\components\ScrollFloatt.css" />

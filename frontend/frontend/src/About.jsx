@@ -6,7 +6,6 @@ function About() {
     return (
         <div className="about-page">
             <div className="about-container">
-                {/* Заголовок */}
                 <div className="about-header">
                     <SplitText
                         text="О нас"
@@ -21,9 +20,7 @@ function About() {
                     />
                 </div>
 
-                {/* Основной контент */}
                 <div className="about-content">
-                    {/* Текстовая часть */}
                     <div className="about-text">
                         <h2 className="about-subtitle">
                             Наша деятельность
@@ -56,7 +53,6 @@ function About() {
                         </p>
 
 
-                        {/* Список преимуществ */}
                         <div className="about-features">
                             <div className="feature-item">
                                 <div className="feature-dot"></div>
@@ -77,7 +73,6 @@ function About() {
                         </div>
                     </div>
 
-                    {/* Изображение */}
                     <div className="about-image-section">
                         <div className="image-wrapper">
                             <img
@@ -88,14 +83,12 @@ function About() {
                             <div className="image-border"></div>
                         </div>
 
-                        {/* Подпись к изображению */}
                         <div className="image-caption">
                             <p>Наша рабочая техника - УРАЛ для перевозки лесоматериалов</p>
                         </div>
                     </div>
                 </div>
 
-                {/* Дополнительный раздел */}
                 <div className="about-why">
                     <h3 className="why-title">
                         Почему обращаются к нам

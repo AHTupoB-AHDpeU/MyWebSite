@@ -6,7 +6,6 @@ function Contact() {
     return (
         <div className="contact-page">
             <div className="contact-container">
-                {/* Заголовок */}
                 <div className="contact-header">
                     <SplitText
                         text="Контакты"
@@ -23,9 +22,7 @@ function Contact() {
                     />
                 </div>
 
-                {/* Карточки с контактной информацией */}
                 <div className="contact-cards">
-                    {/* Карточка 1: Способы связи */}
                     <div className="contact-card">
                         <div className="card-icon">
                             <span>📞</span>
@@ -56,7 +53,6 @@ function Contact() {
                         </div>
                     </div>
 
-                    {/* Карточка 2: Время работы */}
                     <div className="contact-card">
                         <div className="card-icon">
                             <span>🕒</span>
@@ -82,7 +78,6 @@ function Contact() {
                         </div>
                     </div>
 
-                    {/* Карточка 3: Адрес */}
                     <div className="contact-card">
                         <div className="card-icon">
                             <span>📍</span>
@@ -109,7 +104,6 @@ function Contact() {
                     </div>
                 </div>
 
-                {/* Дополнительная информация */}
                 <div className="contact-footer">
                     <p className="footer-text">
                         Свяжитесь с нами удобным для вас способом! Мы всегда рады помочь и ответить на ваши вопросы.

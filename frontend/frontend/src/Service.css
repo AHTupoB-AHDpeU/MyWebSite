@@ -10,7 +10,6 @@
     margin: 0 auto;
 }
 
-/* Секция с заголовком и поиском */
 .service-header-section {
     display: flex;
     justify-content: space-between;
@@ -48,6 +47,7 @@
     background-color: white;
     width: 300px;
     transition: border-color 0.3s ease;
+    font-family: inherit;
 }
 
     .search-input:focus {
@@ -76,7 +76,6 @@
         outline: none;
     }
 
-/* Сетка услуг */
 .services-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -84,7 +83,6 @@
     margin-bottom: 40px;
 }
 
-/* Карточка услуги */
 .service-card {
     background: white;
     border-radius: 12px;
@@ -157,7 +155,6 @@
     font-weight: bold;
 }
 
-/* Секция заказа */
 .order-section {
     display: flex;
     justify-content: center;
@@ -190,11 +187,10 @@
         cursor: not-allowed;
     }
 
-/* Стили для модального окна */
 .selected-services-list {
     border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    padding: 12px;
+    border-radius: 10px;
+    padding: 0px 12px;
     background-color: #f9fafb;
 }
 
@@ -203,13 +199,18 @@
     justify-content: space-between;
     padding: 8px 0;
     border-bottom: 1px solid #e5e7eb;
+    text-align: left;
 }
 
     .selected-service-item:last-child {
         border-bottom: none;
     }
 
-/* Адаптивность */
+.service-price-text {
+    min-width: 60px;
+    text-align: right;
+}
+
 @media (max-width: 1200px) {
     .services-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -246,4 +247,14 @@
         width: 100%;
         max-width: 300px;
     }
+}
+
+.centered-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 38vh;
+    text-align: center;
+    font-size: 18px;
+    color: #6b7280;
 }

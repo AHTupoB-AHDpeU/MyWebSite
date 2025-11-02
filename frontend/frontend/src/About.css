@@ -128,7 +128,7 @@
     }
 
 .about-why {
-    margin-top: 60px; /* Уменьшил отступ сверху для этого блока */
+    margin-top: 60px;
     background-color: #f8fafc;
     border-radius: 32px;
     padding: 32px;

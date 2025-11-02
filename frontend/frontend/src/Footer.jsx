@@ -12,7 +12,6 @@ function Footer({ onOpenProfileModal }) {
     return (
         <footer className="footer">
             <div className="footer-container">
-                {/* Левая часть: Логотип и название */}
                 <div className="footer-section logo-section">
                     <img
                         width="80"
@@ -26,7 +25,6 @@ function Footer({ onOpenProfileModal }) {
                     </span>
                 </div>
 
-                {/* Центральная часть: Навигация */}
                 <div className="footer-section nav-section">
                     <Link
                         to="#"
@@ -42,7 +40,6 @@ function Footer({ onOpenProfileModal }) {
                     <Link to="/faq">FAQ</Link>
                 </div>
 
-                {/* Правая часть: Юридическая информация */}
                 <div className="footer-section legal-section">
                     <p className="legal-info">
                         {legalInfo.name}<br />

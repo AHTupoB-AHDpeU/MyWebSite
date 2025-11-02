@@ -9,27 +9,192 @@ import Modal from './Modal';
 import FAQ from "./faq";
 import Footer from './Footer';
 import Privace from "./Privace";
-
 import ScrollToTop from './components/ScrollToTop';
 
-function AuthModal({ isOpen, onClose }) {
-    const [isLogin, setIsLogin] = useState(true); // true = вход, false = регистрация
+const API_BASE = 'http://localhost:8000/api';
+
+const validatePassword = (password) => {
+    const errors = [];
+
+    if (password.length < 8) {
+        errors.push("Пароль должен содержать минимум 8 символов");
+    }
+    if (!/(?=.*[A-Z])/.test(password)) {
+        errors.push("Пароль должен содержать хотя бы одну заглавную букву");
+    }
+    if (!/(?=.*\d)/.test(password)) {
+        errors.push("Пароль должен содержать хотя бы одну цифру");
+    }
+
+    return errors;
+};
+
+function AuthModal({ isOpen, onClose, onLoginSuccess, showAuthRequiredMessage, onHideAuthMessage }) {
+    const [isLogin, setIsLogin] = useState(true);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [passwordErrors, setPasswordErrors] = useState([]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(isLogin ? 'Вход:' : 'Регистрация:', { email, password, name: isLogin ? undefined : name });
-        // Здесь будет логика отправки данных на сервер
-        onClose(); // Закрываем после отправки
+        setError('');
+        setPasswordErrors([]);
+
+        if (!isLogin) {
+            const passwordValidationErrors = validatePassword(password);
+            if (passwordValidationErrors.length > 0) {
+                setPasswordErrors(passwordValidationErrors);
+                return;
+            }
+        }
+
+        setLoading(true);
+
+        try {
+            if (isLogin) {
+                // Вход
+                const response = await fetch(`${API_BASE}/login/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: email,
+                        password: password
+                    }),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    onLoginSuccess(data.user, true);
+                    onClose();
+                } else {
+                    if (data.non_field_errors) {
+                        setError(data.non_field_errors[0]);
+                    } else if (data.detail) {
+                        setError(data.detail);
+                    } else {
+                        setError("Неверные учетные данные");
+                    }
+                }
+            } else {
+                // Регистрация
+                const response = await fetch(`${API_BASE}/register/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: email,
+                        email: email,
+                        password: password,
+                        first_name: name
+                    }),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    setError('');
+                    setIsLogin(true);
+                    setPassword('');
+                    setError("Регистрация прошла успешно! Теперь вы можете войти.");
+                } else {
+                    if (data.username) {
+                        setError("Пользователь с таким email уже существует");
+                    } else if (data.email) {
+                        setError("Некорректный email адрес");
+                    } else if (data.password) {
+                        setError("Пароль не удовлетворяет требованиям");
+                    } else {
+                        setError("Произошла ошибка при регистрации");
+                    }
+                }
+            }
+        } catch (err) {
+            setError('Ошибка подключения к серверу');
+        } finally {
+            setLoading(false);
+        }
     };
+
+    const handlePasswordChange = (e) => {
+        const newPassword = e.target.value;
+        setPassword(newPassword);
+
+        if (!isLogin) {
+            setPasswordErrors(validatePassword(newPassword));
+        }
+    };
+
+    const resetForm = () => {
+        setEmail('');
+        setPassword('');
+        setName('');
+        setError('');
+        setPasswordErrors([]);
+    };
+
+    const handleSwitchMode = () => {
+        setIsLogin(!isLogin);
+        setError('');
+        setPasswordErrors([]);
+        setPassword('');
+        if (onHideAuthMessage) {
+            onHideAuthMessage();
+        }
+    };
+
+    useEffect(() => {
+        if (isOpen) {
+            resetForm();
+        }
+    }, [isOpen]);
+
+    useEffect(() => {
+        if ((email || password || name) && onHideAuthMessage) {
+            onHideAuthMessage();
+        }
+    }, [email, password, name, onHideAuthMessage]);
 
     if (!isOpen) return null;
 
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
             <h2>{isLogin ? 'Авторизация' : 'Регистрация'}</h2>
+
+            {showAuthRequiredMessage && (
+                <div style={{
+                    color: 'red',
+                    marginBottom: '15px',
+                    padding: '10px',
+                    borderRadius: '10px',
+                    backgroundColor: '#fff0f0',
+                    border: '1px solid red',
+                    fontSize: '14px'
+                }}>
+                    Для выполнения этого действия необходимо авторизоваться на сайте.
+                </div>
+            )}
+
+            {error && (
+                <div style={{
+                    color: error.includes('успешно') ? 'green' : 'red',
+                    marginBottom: '10px',
+                    padding: '10px',
+                    borderRadius: '10px',
+                    backgroundColor: error.includes('успешно') ? '#f0fff0' : '#fff0f0',
+                    border: `1px solid ${error.includes('успешно') ? 'green' : 'red'}`
+                }}>
+                    {error}
+                </div>
+            )}
             <form onSubmit={handleSubmit}>
                 {!isLogin && (
                     <div className="input-group">
@@ -37,11 +202,11 @@ function AuthModal({ isOpen, onClose }) {
                         <input
                             id="auth-name-input"
                             type="text"
-                            placeholder="Укажите ваше имя"
+                            placeholder="Введите ваше имя"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             className="auth-input"
-                            required
+                            required={!isLogin}
                         />
                     </div>
                 )}
@@ -55,22 +220,43 @@ function AuthModal({ isOpen, onClose }) {
                         onChange={(e) => setEmail(e.target.value)}
                         className="auth-input"
                         required
+                        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                        title="Введите корректный email адрес"
                     />
                 </div>
                 <div className="input-group">
-                    <label htmlFor="auth-password-input">Пароль</label>
+                    <label htmlFor="auth-password-input">
+                        Пароль
+                        {!isLogin && " (минимум 8 символов, заглавная буква и цифра)"}
+                    </label>
                     <input
                         id="auth-password-input"
                         type="password"
-                        placeholder="Введите пароль"
+                        placeholder={isLogin ? "Введите пароль" : "Придумайте надежный пароль"}
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={handlePasswordChange}
                         className="auth-input"
                         required
+                        minLength={isLogin ? undefined : 8}
                     />
+                    {passwordErrors.length > 0 && (
+                        <div style={{
+                            color: 'red',
+                            fontSize: '12px',
+                            marginTop: '5px'
+                        }}>
+                            {passwordErrors.map((error, index) => (
+                                <div key={index}>• {error}</div>
+                            ))}
+                        </div>
+                    )}
                 </div>
-                <button type="submit" className="auth-button">
-                    {isLogin ? 'Войти' : 'Зарегистрироваться'}
+                <button
+                    type="submit"
+                    className="auth-button"
+                    disabled={loading || (!isLogin && passwordErrors.length > 0)}
+                >
+                    {loading ? 'Загрузка...' : (isLogin ? 'Войти' : 'Зарегистрироваться')}
                 </button>
             </form>
 
@@ -79,12 +265,91 @@ function AuthModal({ isOpen, onClose }) {
                     {isLogin ? 'Нет аккаунта? ' : 'Уже есть аккаунт? '}
                     <span
                         className="auth-switch-link"
-                        onClick={() => setIsLogin(!isLogin)}
+                        onClick={handleSwitchMode}
+                        style={{ cursor: 'pointer', color: '#007bff' }}
                     >
                         {isLogin ? 'Регистрация здесь' : 'Авторизация здесь'}
                     </span>
                 </p>
             </div>
+        </Modal>
+    );
+}
+
+function ProfileModal({ isOpen, onClose, user, onLogout, showSuccessMessage }) {
+    const [loading, setLoading] = useState(false);
+
+    const handleLogout = async () => {
+        setLoading(true);
+        try {
+            const token = localStorage.getItem('token');
+            await fetch(`${API_BASE}/logout/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Token ${token}`
+                },
+            });
+        } catch (err) {
+            console.error('Logout error:', err);
+        } finally {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            onLogout();
+            setLoading(false);
+            onClose();
+        }
+    };
+
+    if (!isOpen || !user) return null;
+
+    return (
+        <Modal isOpen={isOpen} onClose={onClose}>
+            <h2>Профиль</h2>
+
+            {showSuccessMessage && (
+                <div style={{
+                    color: 'green',
+                    marginBottom: '15px',
+                    padding: '10px',
+                    borderRadius: '5px',
+                    backgroundColor: '#f0fff0',
+                    border: '1px solid green'
+                }}>
+                    Успешный вход! Ваши данные представлены ниже.
+                </div>
+            )}
+
+            <div className="input-group">
+                <label htmlFor="profile-name">Имя</label>
+                <input
+                    id="profile-name"
+                    type="text"
+                    value={user.first_name || 'Не указано'}
+                    className="auth-input"
+                    readOnly
+                />
+            </div>
+
+            <div className="input-group">
+                <label htmlFor="profile-email">Электронная почта</label>
+                <input
+                    id="profile-email"
+                    type="email"
+                    value={user.email}
+                    className="auth-input"
+                    readOnly
+                />
+            </div>
+
+            <button
+                type="button"
+                className="auth-button"
+                onClick={handleLogout}
+                disabled={loading}
+            >
+                {loading ? 'Выход...' : 'Выйти'}
+            </button>
         </Modal>
     );
 }
@@ -111,9 +376,52 @@ function PageTitle() {
 }
 
 function AppContent() {
+    const [user, setUser] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [showSuccessLoginMessage, setShowSuccessLoginMessage] = useState(false);
+    const [showAuthRequiredMessage, setShowAuthRequiredMessage] = useState(false);
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        const userData = localStorage.getItem('user');
+
+        if (token && userData) {
+            setUser(JSON.parse(userData));
+        }
+    }, []);
+
+    const handleLoginSuccess = (userData, showSuccess = false) => {
+        setUser(userData);
+        if (showSuccess) {
+            setShowSuccessLoginMessage(true);
+            setIsProfileModalOpen(true);
+        }
+    };
+
+    const handleLogout = () => {
+        setUser(null);
+        setShowSuccessLoginMessage(false);
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+    };
+
+    const handleOrderServiceClick = () => {
+        if (user) {
+            window.location.href = '/service';
+        } else {
+            openAuthModal(true);
+        }
+    };
+
+    const handleProfileClick = () => {
+        if (user) {
+            setIsProfileModalOpen(true);
+        } else {
+            openAuthModal(true);
+        }
+    };
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -123,72 +431,19 @@ function AppContent() {
         setIsMobileMenuOpen(false);
     };
 
-    const ProfileModal = ({ isOpen, onClose }) => {
+    const openAuthModal = (showMessage = false) => {
+        setIsModalOpen(true);
+        setShowAuthRequiredMessage(showMessage);
+    };
 
-        const [name, setName] = useState('Иван Иванов');
-        const [email, setEmail] = useState('ivanov@example.com');
-        const [password, setPassword] = useState('moйПар0ль!');
-
-        const handleLogout = () => {
-            console.log('Выход из системы');
-            // Здесь будет логика выхода (очистка токена, сброс состояния и т.д.)
-            onClose(); // Закрываем модальное окно после выхода
-        };
-
-        if (!isOpen) return null;
-
-        return (
-            <Modal isOpen={isOpen} onClose={onClose}>
-                <h2>Профиль</h2>
-
-                <div className="input-group">
-                    <label htmlFor="profile-name">Имя</label>
-                    <input
-                        id="profile-name"
-                        type="text"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        className="auth-input"
-                        readOnly // Поле не редактируется
-                    />
-                </div>
-
-                <div className="input-group">
-                    <label htmlFor="profile-email">Электронная почта</label>
-                    <input
-                        id="profile-email"
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="auth-input"
-                        readOnly
-                    />
-                </div>
-
-                <div className="input-group">
-                    <label htmlFor="profile-password">Пароль</label>
-                    <input
-                        id="profile-password"
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        className="auth-input"
-                        readOnly // Поле не редактируется
-                        placeholder="••••••••"
-                    />
-                </div>
-
-                <button type="button" className="auth-button" onClick={handleLogout}>
-                    Выйти
-                </button>
-            </Modal>
-        );
+    const handleCloseAuthModal = () => {
+        setIsModalOpen(false);
+        setShowAuthRequiredMessage(false);
     };
 
     return (
         <>
             <PageTitle />
-            {/* Стили для мобильного меню */}
             <style>
                 {`
                 .desktop-menu {
@@ -341,7 +596,6 @@ function AppContent() {
                 `}
             </style>
 
-            {/* Меню */}
             <div style={{ maxWidth: "1600px", width: "100%", padding: "0 20px", boxSizing: "border-box", margin: "auto" }}>
                 <div style={{
                     display: 'flex',
@@ -350,7 +604,6 @@ function AppContent() {
                     padding: '20px 0',
                     position: 'relative'
                 }}>
-                    {/* Название сайта слева */}
                     <div style={{
                         fontSize: '30px',
                         fontWeight: 'bold',
@@ -362,7 +615,6 @@ function AppContent() {
                         </Link>
                     </div>
 
-                    {/* Десктопное меню справа */}
                     <div className="desktop-menu">
                         <Link to="/">
                             <button className="nav-button">Главная</button>
@@ -380,8 +632,19 @@ function AppContent() {
                             <button className="nav-button">Услуги</button>
                         </Link>
                         <button
-                            onClick={() => setIsModalOpen(true)}
-                            style={{ borderRadius: "30px", padding: '8px 50px', fontSize: '30px', background: "#FFD700", marginLeft: '30px', outline: 'none', border: 'none', color: '#1f2937', cursor: 'pointer', transition: 'box-shadow 0.3s ease' }}
+                            onClick={handleOrderServiceClick}
+                            style={{
+                                borderRadius: "30px",
+                                padding: '8px 50px',
+                                fontSize: '30px',
+                                background: "#FFD700",
+                                marginLeft: '30px',
+                                outline: 'none',
+                                border: 'none',
+                                color: '#1f2937',
+                                cursor: 'pointer',
+                                transition: 'box-shadow 0.3s ease'
+                            }}
                             onMouseEnter={(e) => {
                                 e.target.style.boxShadow = '0 0 0 3px #8A2BE2';
                             }}
@@ -393,7 +656,6 @@ function AppContent() {
                         </button>
                     </div>
 
-                    {/* Кнопка мобильного меню */}
                     <button
                         className={`mobile-menu-button ${isMobileMenuOpen ? 'active' : ''}`}
                         onClick={toggleMobileMenu}
@@ -406,7 +668,6 @@ function AppContent() {
                 </div>
             </div>
 
-            {/* Мобильное меню */}
             {isMobileMenuOpen && (
                 <div className="mobile-menu-overlay" onClick={closeMobileMenu}></div>
             )}
@@ -426,6 +687,29 @@ function AppContent() {
                 <Link to="/service" onClick={closeMobileMenu}>
                     <button className="mobile-nav-button">Услуги</button>
                 </Link>
+
+                {user ? (
+                    <button
+                        className="mobile-order-button"
+                        onClick={() => {
+                            closeMobileMenu();
+                            setIsProfileModalOpen(true);
+                        }}
+                    >
+                        Профиль
+                    </button>
+                ) : (
+                    <button
+                        className="mobile-order-button"
+                        onClick={() => {
+                            closeMobileMenu();
+                            setIsModalOpen(true);
+                        }}
+                    >
+                        Войти
+                    </button>
+                )}
+
                 <button
                     className="mobile-order-button"
                     onClick={() => {
@@ -438,25 +722,39 @@ function AppContent() {
             </div>
 
             <div style={{ width: "100%", minHeight: "calc(80vh)", display: "flex", justifyContent: "center", alignItems: "center" }}>
-                {/* Контент */}
                 <div style={{ maxWidth: "1600px", width: "100%", padding: "0 20px 40px", boxSizing: "border-box" }}>
                     <Routes>
-                        <Route path="/" element={<Home />} />
+                        <Route path="/" element={<Home user={user} />} />
                         <Route path="/about" element={<About />} />
                         <Route path="/contact" element={<Contact />} />
-                        <Route path="/review" element={<Review />} />
-                        <Route path="/service" element={<Service />} />
+                        <Route path="/review" element={<Review user={user} openAuthModal={openAuthModal} />} />
+                        <Route path="/service" element={<Service user={user} openAuthModal={openAuthModal} />} />
                         <Route path="/faq" element={<FAQ />} />
                         <Route path="/privacy" element={<Privace />} />
                     </Routes>
                 </div>
             </div>
 
-            {/* Модальное окно */}
-            <ProfileModal isOpen={isProfileModalOpen} onClose={() => setIsProfileModalOpen(false)} />
-            <AuthModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+            {/* Модальные окна */}
+            <ProfileModal
+                isOpen={isProfileModalOpen}
+                onClose={() => {
+                    setIsProfileModalOpen(false);
+                    setShowSuccessLoginMessage(false);
+                }}
+                user={user}
+                onLogout={handleLogout}
+                showSuccessMessage={showSuccessLoginMessage}
+            />
+            <AuthModal
+                isOpen={isModalOpen}
+                onClose={handleCloseAuthModal}
+                onLoginSuccess={handleLoginSuccess}
+                showAuthRequiredMessage={showAuthRequiredMessage}
+                onHideAuthMessage={() => setShowAuthRequiredMessage(false)}
+            />
 
-            <Footer onOpenProfileModal={() => setIsProfileModalOpen(true)} />
+            <Footer onOpenProfileModal={handleProfileClick} />
         </>
     );
 }

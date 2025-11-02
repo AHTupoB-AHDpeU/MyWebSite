@@ -10,7 +10,6 @@
     margin: 0 auto;
 }
 
-/* Секция с заголовком и кнопкой */
 .review-header-section {
     display: flex;
     justify-content: space-between;
@@ -35,7 +34,7 @@
 }
 
 .review-header-button {
-    padding: 16px 36px;
+    padding: 16px 70px;
     font-size: 24px;
     border: none;
     border-radius: 30px;
@@ -55,14 +54,12 @@
         outline: none;
     }
 
-/* Список отзывов */
 .reviews-list {
     display: flex;
     flex-direction: column;
     gap: 24px;
 }
 
-/* Карточка отзыва */
 .review-item {
     background: white;
     border-radius: 12px;
@@ -116,7 +113,6 @@
     text-align: right;
 }
 
-/* Адаптивность */
 @media (max-width: 768px) {
     .review-page {
         padding: 24px 12px;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './Modal.css'; // Подключим стили
+import './Modal.css';
 
 const Modal = ({ isOpen, onClose, children }) => {
     const [isClosing, setIsClosing] = useState(false);
@@ -27,12 +27,12 @@ const Modal = ({ isOpen, onClose, children }) => {
                 targetElement.style.paddingRight = `${parseFloat(originalPaddingRight || 0) + scrollbarWidth}px`;
             }
             document.addEventListener('keydown', closeOnEscape);
-            document.body.style.overflow = 'hidden'; // Блокируем прокрутку
+            document.body.style.overflow = 'hidden';
         }
 
         return () => {
             document.removeEventListener('keydown', closeOnEscape);
-            document.body.style.overflow = 'unset'; // Возвращаем прокрутку
+            document.body.style.overflow = 'unset';
             const targetElement = document.documentElement;
             targetElement.style.paddingRight = originalPaddingRight || '';
         };
@@ -40,10 +40,9 @@ const Modal = ({ isOpen, onClose, children }) => {
 
     const handleClose = () => {
         setIsClosing(true);
-        // Ждем завершения анимации перед вызовом onClose
         setTimeout(() => {
             onClose();
-        }, 300); // Должно совпадать с длительностью анимации закрытия в CSS
+        }, 300);
     };
 
     if (!isOpen && !isClosing) return null;
