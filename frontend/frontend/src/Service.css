@@ -3,11 +3,31 @@
     padding: 32px 80px 32px 80px;
     background-color: #f8fafc;
     border-radius: 32px;
+    position: relative;
+    overflow: hidden;
 }
+
+    .service-page::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url('/back.png');
+        background-repeat: repeat-y;
+        background-size: 100% auto;
+        background-position: center top;
+        opacity: 0.6;
+        z-index: 0;
+        border-radius: 32px;
+    }
 
 .service-container {
     max-width: 1600px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
 }
 
 .service-header-section {
@@ -172,10 +192,12 @@
     font-family: inherit;
     transition: background-color 0.3s ease;
     white-space: nowrap;
+    transition: all 0.3s ease;
 }
 
     .order-button:hover:not(:disabled) {
         background-color: #4B0082;
+        transform: translateY(-3px);
     }
 
     .order-button:focus {
@@ -219,7 +241,7 @@
 
 @media (max-width: 768px) {
     .service-page {
-        padding: 24px 20px;
+        padding: 24px 12px;
     }
 
     .service-header-section {
@@ -228,7 +250,7 @@
     }
 
     .service-title {
-        font-size: 28px;
+        font-size: 36px;
     }
 
     .search-section {
@@ -245,7 +267,7 @@
 
     .order-button {
         width: 100%;
-        max-width: 300px;
+        max-width: 350px;
     }
 }
 

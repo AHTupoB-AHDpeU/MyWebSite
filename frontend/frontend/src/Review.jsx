@@ -2,6 +2,10 @@
 import Modal from './Modal';
 import './Review.css';
 import SplitText from "./components/SplitText";
+import config from './config';
+import AnimatedContent from './components/AnimatedContent'
+
+const API_BASE = `${config.API_BASE_URL}/api`;
 
 function ReviewModal({ isOpen, onClose, user, services, ratings, onReviewCreated }) {
     const [selectedService, setSelectedService] = useState('');
@@ -24,7 +28,8 @@ function ReviewModal({ isOpen, onClose, user, services, ratings, onReviewCreated
 
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch('http://localhost:8000/api/reviews/create/', {
+            const response = await fetch(`${API_BASE}/reviews/create/`, {
+            //const response = await fetch('http://localhost:8000/api/reviews/create/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -41,9 +46,6 @@ function ReviewModal({ isOpen, onClose, user, services, ratings, onReviewCreated
                 const data = await response.json();
                 console.log('Отзыв создан:', data);
                 setSuccess(true);
-                if (onReviewCreated) {
-                    onReviewCreated();
-                }
             } else {
                 const errorData = await response.json();
                 setError(errorData.detail || errorData.message || 'Ошибка при создании отзыва');
@@ -53,6 +55,13 @@ function ReviewModal({ isOpen, onClose, user, services, ratings, onReviewCreated
         } finally {
             setLoading(false);
         }
+    };
+
+    const handleClose = () => {
+        if (success && onReviewCreated) {
+            onReviewCreated();
+        }
+        onClose();
     };
 
     const resetForm = () => {
@@ -72,7 +81,7 @@ function ReviewModal({ isOpen, onClose, user, services, ratings, onReviewCreated
     if (!isOpen) return null;
 
     return (
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal isOpen={isOpen} onClose={handleClose}>
             <h2>Оставить отзыв</h2>
 
             {success && (
@@ -195,14 +204,21 @@ function Review({ user, openAuthModal }) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const handleReviewCreated = () => {
+        fetchData();
+    };
+
     const fetchData = async () => {
         try {
             setLoading(true);
 
             const [reviewsResponse, servicesResponse, ratingsResponse] = await Promise.all([
-                fetch('http://localhost:8000/api/reviews/'),
-                fetch('http://localhost:8000/api/services/'),
-                fetch('http://localhost:8000/api/ratings/')
+                fetch(`${API_BASE}/reviews/`),
+                //fetch('http://localhost:8000/api/reviews/'),
+                fetch(`${API_BASE}/services/`),
+                //fetch('http://localhost:8000/api/services/'),
+                fetch(`${API_BASE}/ratings/`)
+                //fetch('http://localhost:8000/api/ratings/')
             ]);
 
             if (!reviewsResponse.ok || !servicesResponse.ok || !ratingsResponse.ok) {
@@ -306,25 +322,38 @@ function Review({ user, openAuthModal }) {
                 </div>
 
                 {reviews.length > 0 ? (
-                    <div className="reviews-list">
-                        {reviews.map(review => (
-                            <div key={review.id} className="review-item">
-                                <div className="review-item-header">
-                                    <h3 className="review-author">
-                                        {review.user_first_name || review.user_username || 'Пользователь'}
-                                    </h3>
-                                    <div className="review-rating">
-                                        {renderStars(review.rating_value)}
+                    <AnimatedContent
+                        distance={200}
+                        direction="vertical"
+                        reverse={false}
+                        duration={2.0}
+                        ease="power3.out"
+                        initialOpacity={0}
+                        animateOpacity={true}
+                        scale={1}
+                        threshold={0.1}
+                        delay={0.5}
+                    >
+                        <div className="reviews-list">
+                            {reviews.map(review => (
+                                <div key={review.id} className="review-item">
+                                    <div className="review-item-header">
+                                        <h3 className="review-author">
+                                            {review.user_first_name || review.user_username || 'Пользователь'}
+                                        </h3>
+                                        <div className="review-rating">
+                                            {renderStars(review.rating_value)}
+                                        </div>
+                                    </div>
+                                    <p className="review-service">Услуга: {review.service_name}</p>
+                                    <p className="review-text">{review.description}</p>
+                                    <div className="review-date">
+                                        {formatDate(review.date)}
                                     </div>
                                 </div>
-                                <p className="review-service">Услуга: {review.service_name}</p>
-                                <p className="review-text">{review.description}</p>
-                                <div className="review-date">
-                                    {formatDate(review.date)}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+                            ))}
+                        </div>
+                    </AnimatedContent>
                 ) : (
                     <div className="centered-message no-reviews-message">
                         Пока нет отзывов. Будьте первым!
@@ -337,6 +366,7 @@ function Review({ user, openAuthModal }) {
                     user={user}
                     services={services}
                     ratings={ratings}
+                    onReviewCreated={handleReviewCreated}
                 />
             </div>
         </div>

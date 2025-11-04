@@ -1,5 +1,5 @@
 ﻿import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link, useLocation, useNavigate } from "react-router-dom";
 import Home from "./Home";
 import About from "./About";
 import Contact from "./Contact";
@@ -10,8 +10,11 @@ import FAQ from "./faq";
 import Footer from './Footer';
 import Privace from "./Privace";
 import ScrollToTop from './components/ScrollToTop';
+import config from './config';
 
-const API_BASE = 'http://localhost:8000/api';
+//const API_BASE = 'http://localhost:8000/api';
+const API_BASE = `${config.API_BASE_URL}/api`;
+
 
 const validatePassword = (password) => {
     const errors = [];
@@ -383,6 +386,8 @@ function AppContent() {
     const [showSuccessLoginMessage, setShowSuccessLoginMessage] = useState(false);
     const [showAuthRequiredMessage, setShowAuthRequiredMessage] = useState(false);
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         const token = localStorage.getItem('token');
         const userData = localStorage.getItem('user');
@@ -409,7 +414,7 @@ function AppContent() {
 
     const handleOrderServiceClick = () => {
         if (user) {
-            window.location.href = '/service';
+            navigate('/service');
         } else {
             openAuthModal(true);
         }
@@ -513,10 +518,11 @@ function AppContent() {
                     box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
                     transition: right 0.3s ease;
                     z-index: 1000;
-                    padding: 80px 20px 20px;
+                    padding: 20px 20px 20px;
                     display: flex;
                     flex-direction: column;
                     gap: 10px;
+                    overflow-y: auto;
                 }
                 
                 .mobile-menu-content.open {
@@ -564,6 +570,8 @@ function AppContent() {
                     transition: all 0.3s ease;
                     font-family: 'Oswald', sans-serif;
                     margin-top: 20px;
+                    width: 100%;
+                    box-sizing: border-box;
                 }
 
                 .mobile-order-button:focus,
@@ -710,15 +718,23 @@ function AppContent() {
                     </button>
                 )}
 
-                <button
-                    className="mobile-order-button"
-                    onClick={() => {
-                        closeMobileMenu();
-                        setIsModalOpen(true);
-                    }}
-                >
-                    Заказать услугу
-                </button>
+                {user ? (
+                    <Link to="/service" onClick={closeMobileMenu}>
+                        <button className="mobile-order-button">
+                            Заказать услугу
+                        </button>
+                    </Link>
+                ) : (
+                    <button
+                        className="mobile-order-button"
+                        onClick={() => {
+                            closeMobileMenu();
+                            openAuthModal(true);
+                        }}
+                    >
+                        Заказать услугу
+                    </button>
+                )}
             </div>
 
             <div style={{ width: "100%", minHeight: "calc(80vh)", display: "flex", justifyContent: "center", alignItems: "center" }}>

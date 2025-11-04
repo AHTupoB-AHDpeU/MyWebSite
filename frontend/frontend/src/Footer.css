@@ -39,7 +39,7 @@
         }
 
 .site-name {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 600;
     color: #1f2937;
     line-height: 1.4;
@@ -51,6 +51,7 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 15px;
+    margin-top: 30px;
 }
 
     .nav-section a {
@@ -134,6 +135,7 @@
 
     .nav-section {
         justify-content: center;
+        margin-top: 0px;
     }
 }
 
@@ -154,7 +156,7 @@
     }
 
         .nav-section a {
-            font-size: 14px;
+            font-size: 18px;
             padding: 6px 12px;
         }
 }
@@ -170,7 +172,7 @@
     }
 
     .site-name {
-        font-size: 16px;
+        font-size: 18px;
     }
 
     .nav-section {
@@ -178,7 +180,7 @@
     }
 
         .nav-section a {
-            font-size: 12px;
+            font-size: 18px;
             padding: 4px 8px;
         }
 

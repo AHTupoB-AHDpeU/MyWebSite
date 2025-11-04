@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import AnimatedContent from './components/AnimatedContent'
 import './Home.css';
 import SplitText from "./components/SplitText";
+import config from './config';
+
+const API_BASE = `${config.API_BASE_URL}/api`;
 
 function Home({ user }) {
     const navigate = useNavigate();
@@ -16,8 +19,8 @@ function Home({ user }) {
         const fetchReviews = async () => {
             try {
                 setLoading(true);
-                const response = await fetch('http://localhost:8000/api/reviews/');
-
+                const response = await fetch(`${API_BASE}/reviews/`);
+                //const response = await fetch('http://localhost:8000/api/reviews/');
                 if (!response.ok) {
                     throw new Error('Ошибка загрузки отзывов');
                 }
@@ -81,7 +84,8 @@ function Home({ user }) {
     };
 
     const handleNavigateToAdmin = () => {
-        window.open('http://localhost:8000/admin/', '_blank');
+        window.open(`${config.API_BASE_URL}/admin/`, '_blank');
+        //window.open('http://localhost:8000/admin/');
     };
 
     const isAdminOrStaff = user?.is_staff || user?.is_superuser;
@@ -89,26 +93,111 @@ function Home({ user }) {
     return (
         <div className="home-page">
             <div className="home-container">
-                <AnimatedContent
-                    distance={300}
-                    direction="vertical"
-                    reverse={false}
-                    duration={3.0}
-                    ease="power3.out"
-                    initialOpacity={0}
-                    animateOpacity={true}
-                    scale={1}
-                    threshold={0.1}
-                    delay={0.1}
-                >
-                    <div className="home-image-wrapper">
-                        <img
-                            src="/main-image.png"
-                            alt="Главное изображение"
-                            className="home-image"
-                        />
+                <div className="main-content-wrapper">
+                    <AnimatedContent
+                        distance={200}
+                        direction="horizontal"
+                        reverse={false}
+                        duration={2.0}
+                        ease="power3.out"
+                        initialOpacity={0}
+                        animateOpacity={true}
+                        scale={1}
+                        threshold={0.1}
+                        delay={0.5}
+                    >
+                        <div className="left-image-section">
+                            <img
+                                src="/main-image.png"
+                                alt="Главное изображение"
+                                className="home-image-full"
+                            />
+                        </div>
+                    </AnimatedContent>
+
+                    <div className="right-text-section">
+                        <div className="text-content">
+                            <AnimatedContent
+                                distance={200}
+                                direction="vertical"
+                                reverse={true}
+                                duration={2.0}
+                                ease="power3.out"
+                                initialOpacity={0}
+                                animateOpacity={true}
+                                scale={1}
+                                threshold={0.1}
+                                delay={2.0}
+                            >
+                                <h1 className="main-title">НАДЁЖНОСТЬ,</h1>
+                            </AnimatedContent>
+
+                            <AnimatedContent
+                                distance={200}
+                                direction="vertical"
+                                reverse={true}
+                                duration={3.0}
+                                ease="power3.out"
+                                initialOpacity={0}
+                                animateOpacity={true}
+                                scale={1}
+                                threshold={0.1}
+                                delay={3.0}
+                            >
+                                <h1 className="main-title1">ПРОВЕРЕННАЯ</h1>
+                            </AnimatedContent>
+
+                            <AnimatedContent
+                                distance={200}
+                                direction="vertical"
+                                reverse={true}
+                                duration={2.0}
+                                ease="power3.out"
+                                initialOpacity={0}
+                                animateOpacity={true}
+                                scale={1}
+                                threshold={0.1}
+                                delay={4.0}
+                            >
+                                <h1 className="main-title2">КИЛОМЕТРАМИ</h1>
+                            </AnimatedContent>
+                        </div>
                     </div>
-                </AnimatedContent>
+                </div>
+
+                <div className="bottom-headers">
+                    <AnimatedContent
+                        distance={100}
+                        direction="vertical"
+                        reverse={true}
+                        duration={1.5}
+                        ease="power2.out"
+                        initialOpacity={0}
+                        animateOpacity={true}
+                        threshold={0.1}
+                        delay={0.8}
+                    >
+                        <div className="left-bottom-header">
+                            <h2 className="decorative-header-left">Партнёр, на которого можно положиться</h2>
+                        </div>
+                    </AnimatedContent>
+
+                    <AnimatedContent
+                        distance={100}
+                        direction="vertical"
+                        reverse={true}
+                        duration={1.5}
+                        ease="power2.out"
+                        initialOpacity={0}
+                        animateOpacity={true}
+                        threshold={0.1}
+                        delay={1.0}
+                    >
+                        <div className="right-bottom-header">
+                            <h2 className="decorative-header-right">Мы ценим ваше время так же, как и ваш груз</h2>
+                        </div>
+                    </AnimatedContent>
+                </div>
 
                 <div className="services-cta-section">
                     <button
